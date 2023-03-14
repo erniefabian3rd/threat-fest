@@ -1,0 +1,21 @@
+.band__photo {
+    width: 400px;
+    height: auto;
+}
+
+.band {
+    display: flex;
+    flex-direction: column;
+    padding-top: 15px;
+}
+
+.bands {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.lineup__header {
+    text-align: center;
+}
