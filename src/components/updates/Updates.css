@@ -1,0 +1,17 @@
+.updateList__header {
+    text-align: center;
+}
+
+
+.update {
+    background: rgba(.5,.5,.5,.2);
+    margin-bottom: 20px;
+}
+
+.message {
+    padding: 10px;
+}
+
+.author__date {
+    padding: 10px;
+}

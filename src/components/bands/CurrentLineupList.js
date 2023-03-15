@@ -14,7 +14,7 @@ ALGORITHM:
 */
 
 import { useEffect, useState } from "react"
-import { getSubmittedBands } from "../ApiManager"
+import { getSubmittedBandsAndGenres } from "../ApiManager"
 import "./Bands.css"
 
 export const CurrentLineupList = () => {
@@ -22,7 +22,7 @@ export const CurrentLineupList = () => {
 
     useEffect(
         () => {
-            getSubmittedBands()
+            getSubmittedBandsAndGenres()
             .then((submittedBandsArray) => {
                 const sortedSubmittedBands = submittedBandsArray.sort((a, b) => a.bandName.localeCompare(b.bandName))
                 setBands(sortedSubmittedBands)
