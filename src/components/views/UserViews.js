@@ -6,8 +6,7 @@ ALGORITHM:
 
 import { Outlet, Route, Routes } from "react-router-dom"
 import { About } from "../about/About"
-import { AlumniLineupList } from "../bands/AlumniLineupList"
-import { CurrentLineupList } from "../bands/CurrentLineupList"
+import { AlumniBandContainer, CurrentBandContainer } from "../bands/BandContainers"
 import { SubmissionForm } from "../submissions/SubmissionForm"
 import { UpdateList } from "../updates/UpdateList"
 
@@ -29,8 +28,8 @@ export const UserViews = () => {
                 </>
             }>
 
-                <Route path="lineup" element={ <CurrentLineupList/> } />
-				<Route path="alumni" element={ <AlumniLineupList/> } />
+                <Route path="lineup" element={ <CurrentBandContainer /> } />
+				<Route path="alumni" element={ <AlumniBandContainer /> } />
                 <Route path="application" element={ <SubmissionForm /> } />
                 <Route path="updates" element={ <UpdateList/> } />
 

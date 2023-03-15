@@ -18,41 +18,93 @@ import { useEffect, useState } from "react"
 import { getAlumniBands } from "../ApiManager"
 import "./Bands.css"
 
-export const AlumniLineupList = () => {
+export const AlumniLineupList = ({ searchTermState, filteredYearState, filteredGenreState }) => {
     const [alumniBands, setAlumniBands] = useState([])
+    const [filteredAlumniBands, setFilteredAlumni] = useState([])
+
+    const localFestUser = localStorage.getItem(["fest_user"])
+    const festUserObject = JSON.parse(localFestUser)
+
 
     useEffect(
         () => {
             getAlumniBands()
-            .then((alumniBandsArray) => {
-                const bandsByName = alumniBandsArray.reduce((acc, band) => {
-                    if (!acc[band.bandName]) {
-                        acc[band.bandName] = band
-                    }
-                    return acc
-                }, {})
-                const removedDuplicates = Object.values(bandsByName) 
-                removedDuplicates.sort((a, b) => a.bandName.localeCompare(b.bandName))
-                setAlumniBands(removedDuplicates)
-            })
+                .then((alumniBandsArray) => {
+                    const bandsByName = alumniBandsArray.reduce((acc, band) => {
+                        if (!acc[band.bandName]) {
+                            acc[band.bandName] = {
+                                ...band,
+                                years: [band.yearId],
+                            }
+                        } else {
+                            acc[band.bandName].years.push(band.yearId)
+                        }
+                        return acc
+                    }, {})
+                    const removedDuplicates = Object.values(bandsByName)
+                    removedDuplicates.sort((a, b) => a.bandName.localeCompare(b.bandName))
+                    setAlumniBands(removedDuplicates)
+                })
         },
         []
     )
 
-    return <article>
-    <h2 className="lineup__header">Alumni Bands</h2>
-        <section className="bands">
-            {
-                alumniBands.map(
-                    (band) => {
-                        return <section className="band" key={`band--${band.id}`}>
-                                    <img className="band__photo" src={band.photoURL}></img>
-                                    <h3><b>{band.bandName}</b></h3>
-                                    <div>{band.genre.name}</div>
-                                </section>
-                    }
-                )
+    useEffect(
+        () => {
+            if (festUserObject) {
+                setFilteredAlumni(alumniBands)
             }
-        </section>
-    </article>
+        },
+        [alumniBands]
+    )
+
+    useEffect(
+        () => {
+            const searchedAlumni = alumniBands.filter(alumniBand => {
+                return alumniBand.bandName.toLowerCase().includes(searchTermState.toLowerCase())
+            })
+            setFilteredAlumni(searchedAlumni)
+        },
+        [searchTermState]
+    )
+
+
+    useEffect(
+        () => {
+            let filteredYearAlumni = alumniBands
+            if (filteredYearState) {
+            filteredYearAlumni = alumniBands.filter((alumniBand) => alumniBand.years.includes(parseInt(filteredYearState))
+            )
+            }
+            setFilteredAlumni(filteredYearAlumni)
+    },
+    [filteredYearState]
+    )
+
+    useEffect(
+        () => {
+            const filteredGenreAlumni = alumniBands.filter((alumniBand) => alumniBand.genreId === parseInt(filteredGenreState))
+            setFilteredAlumni(filteredGenreAlumni)
+        },
+        [filteredGenreState]
+    )
+    
+
+
+return <article>
+    <h2 className="lineup__header">Alumni Bands</h2>
+    <section className="bands">
+        {
+            filteredAlumniBands.map(
+                (alumniBand) => {
+                    return <section className="band" key={`alumniBand--${alumniBand.id}`}>
+                        <img className="band__photo" src={alumniBand.photoURL}></img>
+                        <h3><b>{alumniBand.bandName}</b></h3>
+                        <div>{alumniBand.genre.name}</div>
+                    </section>
+                }
+            )
+        }
+    </section>
+</article>
 }

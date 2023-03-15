@@ -17,8 +17,12 @@ import { useEffect, useState } from "react"
 import { getSubmittedBandsAndGenres } from "../ApiManager"
 import "./Bands.css"
 
-export const CurrentLineupList = () => {
+export const CurrentLineupList = ( {searchTermState, filteredGenreState} ) => {
     const [bands, setBands] = useState([])
+    const [filteredCurrentBands, setFilteredCurrentBands] = useState([])
+
+    const localFestUser = localStorage.getItem(["fest_user"])
+    const festUserObject = JSON.parse(localFestUser)
 
     useEffect(
         () => {
@@ -31,11 +35,38 @@ export const CurrentLineupList = () => {
         []
     )
 
+    useEffect(
+        () => {
+            if (festUserObject) {
+                setFilteredCurrentBands(bands)
+            }
+        },
+        [bands]
+    )
+
+    useEffect(
+        () => {
+            const searchedCurrentBand = bands.filter(band => {
+                return band.bandName.toLowerCase().includes(searchTermState.toLowerCase())
+            })
+            setFilteredCurrentBands(searchedCurrentBand)
+        },
+        [searchTermState]
+    )
+
+    useEffect(
+        () => {
+            const filteredBands = bands.filter((band) => band.genreId === parseInt(filteredGenreState))
+            setFilteredCurrentBands(filteredBands)
+        },
+        [filteredGenreState]
+    )
+
     return <article>
     <h2 className="lineup__header">Threat Fest 2023</h2>
         <section className="bands">
             {
-                bands.map(
+                filteredCurrentBands.map(
                     (band) => {
                         if (band.isApproved) {
                         return <section className="band" key={`band--${band.id}`}>
