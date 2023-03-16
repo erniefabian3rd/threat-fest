@@ -1,3 +1,11 @@
+/*
+GOAL:
+    Two select dropdowns that filter the bands by 1) year and 2) genre
+ALGORITHM:
+    -Create useEffects to fetch information from the bridge tables in the API
+    -In each function, return the JSX that includes the dropdown options
+*/
+
 import { useEffect, useState } from "react"
 import { getGenres, getYears } from "../ApiManager"
 

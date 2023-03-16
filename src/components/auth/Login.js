@@ -13,13 +13,14 @@ import { useNavigate } from "react-router-dom"
 import "./Login.css"
 
 export const Login = () => {
-    const [email, set] = useState("ernie@threatfest.com")
+    const [email, setEmail] = useState("ernie@threatfest.com")
+    const [password, setPassword] = useState("ethreat1")
     const navigate = useNavigate()
 
     const handleLogin = (e) => {
         e.preventDefault()
 
-        return fetch(`http://localhost:8088/users?email=${email}`)
+        return fetch(`http://localhost:8088/users?email=${email}&password=${password}`)
             .then(res => res.json())
             .then(foundUsers => {
                 if (foundUsers.length === 1) {
@@ -47,9 +48,18 @@ export const Login = () => {
                         <label htmlFor="inputEmail"> Email address </label>
                         <input type="email"
                             value={email}
-                            onChange={evt => set(evt.target.value)}
+                            onChange={evt => setEmail(evt.target.value)}
                             className="form-control"
                             placeholder="Email address"
+                            required autoFocus />
+                    </fieldset>
+                    <fieldset>
+                        <label htmlFor="inputPassword"> Password </label>
+                        <input type="password"
+                            value={password}
+                            onChange={evt => setPassword(evt.target.value)}
+                            className="form-control"
+                            placeholder="Password"
                             required autoFocus />
                     </fieldset>
                     <fieldset>

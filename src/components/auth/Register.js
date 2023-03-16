@@ -15,6 +15,7 @@ import "./Login.css"
 export const Register = (props) => {
     const [user, setUser] = useState({
         email: "",
+        password: "",
         name: "",
         isAdmin: false
     })
@@ -43,7 +44,7 @@ export const Register = (props) => {
 
     const handleRegister = (e) => {
         e.preventDefault()
-        return fetch(`http://localhost:8088/users?email=${user.email}`)
+        return fetch(`http://localhost:8088/users?email=${user.email}&password=${user.password}`)
             .then(res => res.json())
             .then(response => {
                 if (response.length > 0) {
@@ -76,6 +77,12 @@ export const Register = (props) => {
                     <input onChange={updateUser}
                         type="email" id="email" className="form-control"
                         placeholder="Email address" required />
+                </fieldset>
+                <fieldset>
+                    <label htmlFor="password"> Password </label>
+                    <input onChange={updateUser}
+                        type="password" id="password" className="form-control"
+                        placeholder="Password" required />
                 </fieldset>
                 <fieldset>
                     <button type="submit"> Register </button>
