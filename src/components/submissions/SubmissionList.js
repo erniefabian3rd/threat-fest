@@ -14,13 +14,13 @@ ALGORITHM:
 */
 
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { approveSubmissions, denySubmissions, getSubmittedBands, getSubmittedBandsAndGenres } from "../ApiManager"
 import "./Submissions.css"
 
 export const SubmissionList = () => {
     const [bands, setBands] = useState([])
-
+    const navigate = useNavigate()
 
     useEffect(
         () => {
@@ -70,7 +70,7 @@ export const SubmissionList = () => {
                         return <section className="submittedBand" key={`submittedBand--${band.id}`}>
                             <div className="band__info">
                                 <header><b>{band.bandName}</b></header>
-                                <Link className="details__link">View Details</Link>
+                                <p onClick={() => navigate(`/submissions/${band.id}`)} className="details__link"><u>View Details</u></p>
                             </div>
                             <div className="button__section">
                             {band.isApproved === false ? (

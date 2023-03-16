@@ -14,6 +14,7 @@ ALGORITHM:
 */
 
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { getSubmittedBandsAndGenres } from "../ApiManager"
 import "./Bands.css"
 
@@ -23,6 +24,8 @@ export const CurrentLineupList = ( {searchTermState, filteredGenreState} ) => {
 
     const localFestUser = localStorage.getItem(["fest_user"])
     const festUserObject = JSON.parse(localFestUser)
+
+    const navigate = useNavigate()
 
     useEffect(
         () => {
@@ -70,8 +73,8 @@ export const CurrentLineupList = ( {searchTermState, filteredGenreState} ) => {
                     (band) => {
                         if (band.isApproved) {
                         return <section className="band" key={`band--${band.id}`}>
-                                    <img className="band__photo" src={band.photoURL}></img>
-                                    <h3><b>{band.bandName}</b></h3>
+                                    <img onClick={() => navigate(`/lineup/${band.id}`)} className="band__photo" src={band.photoURL}></img>
+                                    <h3 onClick={() => navigate(`/lineup/${band.id}`)} className="band__name"><b>{band.bandName}</b></h3>
                                     <div>{band.genre.name}</div>
                                 </section>
                         }

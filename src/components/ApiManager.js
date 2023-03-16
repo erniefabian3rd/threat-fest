@@ -76,3 +76,20 @@ export const getYears = () => {
     return fetch(`http://localhost:8088/years?_embed=alumniBands`)
         .then(response => response.json()) 
 }
+
+// CurrentLineupDetails.js
+export const getCurrentLineupDetails = (bandId) => {
+    return fetch(`http://localhost:8088/submittedBands?_expand=genre&id=${bandId}`)
+        .then(response => response.json())
+}
+
+// AlumniDetails.js
+export const getAlumniDetails = (alumniBandId) => {
+    return fetch(`http://localhost:8088/alumniBands?_expand=genre&id=${alumniBandId}`)
+        .then(response => response.json()) 
+}
+
+export const getSubmittedBandDetails = (submittedBandId) => {
+    return fetch(`http://localhost:8088/submittedBands?_expand=genre&id=${submittedBandId}`)
+        .then(response => response.json()) 
+}

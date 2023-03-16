@@ -33,3 +33,7 @@
 .button__section {
     padding: 15px;
 }
+
+.details__link {
+    cursor: pointer;
+}

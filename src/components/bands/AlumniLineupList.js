@@ -15,6 +15,7 @@ ALGORITHM:
 */
 
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { getAlumniBands } from "../ApiManager"
 import "./Bands.css"
 
@@ -24,6 +25,8 @@ export const AlumniLineupList = ({ searchTermState, filteredYearState, filteredG
 
     const localFestUser = localStorage.getItem(["fest_user"])
     const festUserObject = JSON.parse(localFestUser)
+
+    const navigate = useNavigate()
 
 
     useEffect(
@@ -98,8 +101,8 @@ return <article>
             filteredAlumniBands.map(
                 (alumniBand) => {
                     return <section className="band" key={`alumniBand--${alumniBand.id}`}>
-                        <img className="band__photo" src={alumniBand.photoURL}></img>
-                        <h3><b>{alumniBand.bandName}</b></h3>
+                        <img onClick={() => navigate(`/alumni/${alumniBand.id}`)} className="band__photo" src={alumniBand.photoURL}></img>
+                        <h3 onClick={() => navigate(`/alumni/${alumniBand.id}`)}><b>{alumniBand.bandName}</b></h3>
                         <div>{alumniBand.genre.name}</div>
                     </section>
                 }

@@ -1,12 +1,17 @@
 .band__photo {
     width: 400px;
     height: auto;
+    cursor: pointer;
 }
 
 .band {
     display: flex;
     flex-direction: column;
     padding-top: 15px;
+}
+
+.band__name {
+    cursor: pointer;
 }
 
 .bands {
