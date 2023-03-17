@@ -10,6 +10,7 @@ ALGORITHM:
 
 import { Link, useNavigate } from "react-router-dom"
 import "./NavBar.css"
+import logo from "../../images/threatfest_logoWhite.png"
 
 export const UserNav = () => {
     const navigate = useNavigate()
@@ -17,26 +18,28 @@ export const UserNav = () => {
     return (
         <ul className="navbar">
             <li className="navbar__item active">
-                <Link className="navbar__link" to="/">Home</Link>
+            <img className="navbar__logo" src={logo} onClick={() => navigate("/")}></img>
             </li>
-            <li className="navbar__item active">
-                <Link className="navbar__link" to="/lineup">Lineup</Link>
-            </li>
-            <li className="navbar__item active">
-                <Link className="navbar__link" to="alumni">Alumni</Link>
-            </li>
-            <li className="navbar__item active">
-                <Link className="navbar__link" to="application">Submission Form</Link>
-            </li>
-            <li className="navbar__item active">
-                <Link className="navbar__link" to="updates">Updates</Link>
-            </li>
-            <li className="navbar__item navbar__logout">
-                <Link className="navbar__link" to="" onClick={() => {
-                    localStorage.removeItem("fest_user")
-                    navigate("/", {replace: true})
-                }}>Logout</Link>
-            </li>
+            <div className="navLink__container">
+                <li className="navbar__item active">
+                    <h2 className="navbar__link" onClick={() => navigate("/lineup")}>lineup</h2>
+                </li>
+                <li className="navbar__item active">
+                    <h2 className="navbar__link" onClick={() => navigate("/alumni")}>alumni</h2>
+                </li>
+                <li className="navbar__item active">
+                    <h2 className="navbar__link" id="link__submit" onClick={() => navigate("/application")}>submission form</h2>
+                </li>
+                <li className="navbar__item active">
+                    <h2 className="navbar__link" onClick={() => navigate("/updateform")}>updates</h2>
+                </li>
+                <li className="navbar__item navbar__logout">
+                    <h2 className="navbar__link" to="" onClick={() => {
+                        localStorage.removeItem("fest_user")
+                        navigate("/", {replace: true})
+                    }}>logout</h2>
+                </li>
+            </div>
         </ul>
     )
 }

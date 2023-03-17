@@ -1,5 +1,8 @@
 .header {
     text-align: center;
+    margin-top: 200px;
+    font-family: 'Libre Franklin', sans-serif;
+    color: white;
 }
 
 .tagline {
@@ -7,11 +10,20 @@
 }
 
 .about__container {
+    background: rgba(0,0,0,.7);
+}
+
+.about__info__container {
     display: flex;
-    margin-top: 50px;
 }
 
 .about__info {
     text-align: left;
     padding-left: 15px;
+    color: white;
+}
+
+body {
+    background: white;
+    background-size: cover;
 }

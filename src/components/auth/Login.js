@@ -11,6 +11,7 @@ import React, { useState } from "react"
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom"
 import "./Login.css"
+import logo from "../../images/threatfest_logoBlack.png"
 
 export const Login = () => {
     const [email, setEmail] = useState("ernie@threatfest.com")
@@ -39,13 +40,14 @@ export const Login = () => {
     }
 
     return (
+        <body className="login_page">
         <main className="container--login">
             <section>
                 <form className="form--login" onSubmit={handleLogin}>
-                    <h1>Threat Fest</h1>
-                    <h2>Please sign in</h2>
+                    <img className="logo" src={logo}></img>
+                    <h2>Please sign in:</h2>
                     <fieldset>
-                        <label htmlFor="inputEmail"> Email address </label>
+                        <label className="login__label" htmlFor="inputEmail"> Email address </label>
                         <input type="email"
                             value={email}
                             onChange={evt => setEmail(evt.target.value)}
@@ -54,7 +56,7 @@ export const Login = () => {
                             required autoFocus />
                     </fieldset>
                     <fieldset>
-                        <label htmlFor="inputPassword"> Password </label>
+                        <label className="login__label" htmlFor="inputPassword"> Password </label>
                         <input type="password"
                             value={password}
                             onChange={evt => setPassword(evt.target.value)}
@@ -63,7 +65,7 @@ export const Login = () => {
                             required autoFocus />
                     </fieldset>
                     <fieldset>
-                        <button type="submit">
+                        <button className="sign__in__btn" type="submit">
                             Sign in
                         </button>
                     </fieldset>
@@ -73,6 +75,7 @@ export const Login = () => {
                 <Link to="/register">Not a member yet?</Link>
             </section>
         </main>
+        </body>
     )
 }
 

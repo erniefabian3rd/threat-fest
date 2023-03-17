@@ -24,8 +24,6 @@ export const AdminViews = () => {
             
             <Route path="/" element={
                 <>
-                    <h1 className="header">Threat Fest</h1>
-                    <div className="tagline">Nashville. Music. Community.</div>
 
                     <Outlet />
                 </>

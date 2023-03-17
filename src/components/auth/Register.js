@@ -9,8 +9,10 @@ ALGORITHM:
 */
 
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import "./Login.css"
+import logo from "../../images/threatfest_logoBlack.png"
+
 
 export const Register = (props) => {
     const [user, setUser] = useState({
@@ -63,32 +65,38 @@ export const Register = (props) => {
     }
 // Form 
     return (
-        <main style={{ textAlign: "center" }}>
-            <form className="form--login" onSubmit={handleRegister}>
-                <h1 className="h3 mb-3 font-weight-normal">Please Register for Threat Fest</h1>
+        <body className="register_page">
+        <main className="container--login" style={{ textAlign: "center" }}>
+            <form className="form--register" onSubmit={handleRegister}>
+            <img className="logo" src={logo}></img>
+            <h2 className="register__header">Register:</h2>
                 <fieldset>
-                    <label htmlFor="name"> Name </label>
+                    
                     <input onChange={updateUser}
-                           type="text" id="name" className="form-control"
-                           placeholder="Enter your name" required autoFocus />
+                           type="name" id="name" className="form-control"
+                           placeholder="Enter your full name" required autoFocus />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="email"> Email address </label>
+                    
                     <input onChange={updateUser}
                         type="email" id="email" className="form-control"
                         placeholder="Email address" required />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="password"> Password </label>
+                
                     <input onChange={updateUser}
                         type="password" id="password" className="form-control"
                         placeholder="Password" required />
                 </fieldset>
                 <fieldset>
-                    <button type="submit"> Register </button>
+                    <button className="register__btn" type="submit"> Register </button>
                 </fieldset>
+                <section className="link--login">
+                    <Link to="/login">Already a member?</Link>
+            </section>
             </form>
         </main>
+        </body>
     )
 }
 

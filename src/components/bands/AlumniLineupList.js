@@ -76,8 +76,7 @@ export const AlumniLineupList = ({ searchTermState, filteredYearState, filteredG
         () => {
             let filteredYearAlumni = alumniBands
             if (filteredYearState) {
-            filteredYearAlumni = alumniBands.filter((alumniBand) => alumniBand.years.includes(parseInt(filteredYearState))
-            )
+            filteredYearAlumni = alumniBands.filter((alumniBand) => alumniBand.yearId === parseInt(filteredYearState))
             }
             setFilteredAlumni(filteredYearAlumni)
     },
