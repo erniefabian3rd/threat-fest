@@ -18,16 +18,18 @@ export const CurrentLineupDetails = () => {
         [bandId]
     )
 
-    return <section className="band">
-    <img className="band__photo" src={band.photoURL}></img>
-    <div><h3><b>{band.bandName}</b></h3></div>
-    <div><b>Genre:</b> {band?.genre?.name}</div>
-    <div><b>Hometown:</b> {band.hometown}</div><br/>
-    <div><b>Bio:</b> {band.bio}</div><br/>
-    <div><b>Members:</b> {band.members}</div><br/>
-    {band.musicLinks ? ( 
-        <a href={band.musicLinks} target="_blank" rel="noopener noreferrer">Music</a>
-    ) : ""    
-    }
+    return <section className="band__details">
+    <img className="band__detail__photo" src={band.photoURL}></img>
+    <div className="band__detail__name"><h3><b>{band.bandName}</b></h3></div>
+    <div className="band__detail__info">
+        <div><b className="detail__header">Genre:</b> {band?.genre?.name}</div>
+        <div><b className="detail__header">Hometown:</b> {band.hometown}</div><br/>
+        <div><b className="detail__header">Bio:</b> {band.bio}</div><br/>
+        <div><b className="detail__header">Members:</b> {band.members}</div><br/>
+        {band.musicLinks ? ( 
+            <a href={band.musicLinks} target="_blank" rel="noopener noreferrer">Music</a>
+        ) : ""    
+        }
+    </div>
 </section>
 }

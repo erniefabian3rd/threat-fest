@@ -23,8 +23,6 @@ export const UserViews = () => {
 
             <Route path="/" element={
                 <>
-                    <h1 className="header">Threat Fest</h1>
-                    <div className="tagline">Nashville. Music. Community.</div>
 
                     <Outlet />
                 </>
@@ -37,7 +35,7 @@ export const UserViews = () => {
                 <Route path="alumni/:alumniBandId" element={ <AlumniDetails /> } />
 
                 <Route path="application" element={ <SubmissionForm /> } />
-                
+
                 <Route path="updates" element={ <UpdateList/> } />
 
             </Route>

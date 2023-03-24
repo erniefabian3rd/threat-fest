@@ -17,6 +17,8 @@ ALGORITHM:
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { getGenres, submitBands } from "../ApiManager"
+import "./Submissions.css"
+import submitPhoto from "../../images/tf_gridstrip_3.png"
 
 export const SubmissionForm = () => {
     const navigate = useNavigate()
@@ -32,6 +34,11 @@ export const SubmissionForm = () => {
     })
     const localFestUser = localStorage.getItem("fest_user")
     const festUserObject = JSON.parse(localFestUser)
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [])
+
 
     useEffect(
         () => {
@@ -66,142 +73,161 @@ export const SubmissionForm = () => {
     }
 
     return (
-    <form className="submissionForm">
-    <h2 className="submissionForm__title">Submission Form:</h2>
-    <fieldset>
-        <div className="form-group">
-            <label htmlFor="bandName">Band Name:</label>
-            <input
-                required autoFocus
-                type="text"
-                className="form-control"
-                placeholder="Band Name"
-                value={band.bandName}
-                onChange={
-                    (evt) => {
-                        const copy = { ...band }
-                        copy.bandName = evt.target.value
-                        update(copy)
-                    }
-                } />
-        </div>
-    </fieldset>
-    <fieldset>
-        <div className="form-group">
-            <label htmlFor="genre">Genre:</label>
-            <select
-                value={band.genreId}
-                onChange={
-                    (evt) => {
-                        const copy = { ...band }
-                        copy.genreId = evt.target.value
-                        update(copy)
-                    }
-                } > <option value="">Choose Genre</option>
-                {genres.map((genre) => (
-                    <option key={genre.id} value={genre.id}>
-                        {genre.name}
-                    </option>
-                ))}
-            </select>
-        </div>
-    </fieldset>
-    <fieldset>
-        <div className="form-group">
-            <label htmlFor="bio">Band Bio:</label>
-            <textarea
-                required autoFocus
-                type="text"
-                className="form-control"
-                placeholder="Tell us about your band"
-                value={band.bio}
-                onChange={
-                    (evt) => {
-                        const copy = { ...band }
-                        copy.bio = evt.target.value
-                        update(copy)
-                    }
-                } />
-        </div>
-    </fieldset>
-    <fieldset>
-        <div className="form-group">
-            <label htmlFor="hometown">Hometown:</label>
-            <input
-                required autoFocus
-                type="text"
-                className="form-control"
-                placeholder="Hometown"
-                value={band.hometown}
-                onChange={
-                    (evt) => {
-                        const copy = { ...band }
-                        copy.hometown = evt.target.value
-                        update(copy)
-                    }
-                } />
-        </div>
-    </fieldset>
-    <fieldset>
-        <div className="form-group">
-            <label htmlFor="members">Members:</label>
-            <input
-                required autoFocus
-                type="text"
-                className="form-control"
-                placeholder="Members' Names (and instruments)"
-                value={band.members}
-                onChange={
-                    (evt) => {
-                        const copy = { ...band }
-                        copy.members = evt.target.value
-                        update(copy)
-                    }
-                } />
-        </div>
-    </fieldset>
-    <fieldset>
-        <div className="form-group">
-            <label htmlFor="photo">Promo Photo:</label>
-            <input
-                required autoFocus
-                type="text"
-                className="form-control"
-                placeholder="Photo URL"
-                value={band.photoURL}
-                onChange={
-                    (evt) => {
-                        const copy = { ...band }
-                        copy.photoURL = evt.target.value
-                        update(copy)
-                    }
-                } />
-        </div>
-    </fieldset>
-    <fieldset>
-        <div className="form-group">
-            <label htmlFor="musicLinks">Link to Music:</label>
-            <input
-                required autoFocus
-                type="text"
-                className="form-control"
-                placeholder="Music Link URL"
-                value={band.musicLinks}
-                onChange={
-                    (evt) => {
-                        const copy = { ...band }
-                        copy.musicLinks = evt.target.value
-                        update(copy)
-                    }
-                } />
-        </div>
-    </fieldset>
+        <>
+            <h2 className="submissionForm__title">Submission Form</h2>
+            <img className="submissionForm__header__image" src={submitPhoto}></img>
+            <form className="submissionForm">
+                <h2>Please fill out our application below:</h2>
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="bandName">Band Name:</label>
+                        <div className="input__field">
+                            <input
+                                required autoFocus
+                                type="text"
+                                className="form-control"
+                                placeholder="Band Name"
+                                value={band.bandName}
+                                onChange={
+                                    (evt) => {
+                                        const copy = { ...band }
+                                        copy.bandName = evt.target.value
+                                        update(copy)
+                                    }
+                                } />
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="genre">Genre:</label>
+                        <div className="input__field">
+                            <select
+                                value={band.genreId}
+                                onChange={
+                                    (evt) => {
+                                        const copy = { ...band }
+                                        copy.genreId = evt.target.value
+                                        update(copy)
+                                    }
+                                } > <option value="">Choose Genre</option>
+                                {genres.map((genre) => (
+                                    <option key={genre.id} value={genre.id}>
+                                        {genre.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="bio">Band Bio:</label>
+                        <div className="input__field">
+                            <textarea
+                                required autoFocus
+                                type="text"
+                                className="form-control-band__bio"
+                                placeholder="Tell us about your band"
+                                value={band.bio}
+                                onChange={
+                                    (evt) => {
+                                        const copy = { ...band }
+                                        copy.bio = evt.target.value
+                                        update(copy)
+                                    }
+                                } />
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="hometown">Hometown:</label>
+                        <div className="input__field">
+                            <input
+                                required autoFocus
+                                type="text"
+                                className="form-control"
+                                placeholder="Hometown"
+                                value={band.hometown}
+                                onChange={
+                                    (evt) => {
+                                        const copy = { ...band }
+                                        copy.hometown = evt.target.value
+                                        update(copy)
+                                    }
+                                } />
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="members">Members:</label>
+                        <div className="input__field">
+                            <input
+                                required autoFocus
+                                type="text"
+                                className="form-control"
+                                placeholder="Members' Names (and instruments)"
+                                value={band.members}
+                                onChange={
+                                    (evt) => {
+                                        const copy = { ...band }
+                                        copy.members = evt.target.value
+                                        update(copy)
+                                    }
+                                } />
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="photo">Promo Photo:</label>
+                        <div className="input__field">
+                            <input
+                                required autoFocus
+                                type="text"
+                                className="form-control"
+                                placeholder="Photo URL"
+                                value={band.photoURL}
+                                onChange={
+                                    (evt) => {
+                                        const copy = { ...band }
+                                        copy.photoURL = evt.target.value
+                                        update(copy)
+                                    }
+                                } />
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="musicLinks">Link to Music:</label>
+                        <div className="input__field">
+                            <input
+                                required autoFocus
+                                type="text"
+                                className="form-control"
+                                placeholder="Music Link URL"
+                                value={band.musicLinks}
+                                onChange={
+                                    (evt) => {
+                                        const copy = { ...band }
+                                        copy.musicLinks = evt.target.value
+                                        update(copy)
+                                    }
+                                } />
+                        </div>
+                    </div>
+                </fieldset>
 
-    <button
-        onClick={(clickEvent) => submissionButton(clickEvent)}
-        className="btn btn-primary">
-        Submit
-    </button>
-</form>
+                <button
+                    onClick={(clickEvent) => {
+                         submissionButton(clickEvent)}}
+                    className="btn-submit"><b>
+                        Submit
+                    </b></button>
+            </form>
+        </>
     )
 }

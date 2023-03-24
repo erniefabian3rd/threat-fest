@@ -18,16 +18,18 @@ export const AlumniDetails = () => {
         [alumniBandId]
     )
 
-    return <section className="band">
-    <img className="band__photo" src={alumniBand.photoURL}></img>
-    <div><h3><b>{alumniBand.bandName}</b></h3></div>
-    <div><b>Genre:</b> {alumniBand?.genre?.name}</div>
-    <div><b>Hometown:</b> {alumniBand.hometown}</div><br/>
-    <div><b>Bio:</b> {alumniBand.bio}</div><br/>
-    <div><b>Members:</b> {alumniBand.members}</div><br/>
-    {alumniBand.musicLinks ? ( 
-        <a href={alumniBand.musicLinks} target="_blank" rel="noopener noreferrer">Music</a>
-    ) : ""    
-    }
+    return <section className="band__details">
+    <img className="band__detail__photo" src={alumniBand.photoURL}></img>
+    <div className="band__detail__name"><h3><b>{alumniBand.bandName}</b></h3></div>
+    <div className="band__detail__info">
+        <div><b className="detail__header">Genre:</b> {alumniBand?.genre?.name}</div>
+        <div><b className="detail__header">Hometown:</b> {alumniBand.hometown}</div><br/>
+        <div><b className="detail__header">Bio:</b> {alumniBand.bio}</div><br/>
+        <div><b className="detail__header">Members:</b> {alumniBand.members}</div><br/>
+        {alumniBand.musicLinks ? ( 
+            <a href={alumniBand.musicLinks} target="_blank" rel="noopener noreferrer">Music</a>
+        ) : ""    
+        }
+    </div>
 </section>
 }

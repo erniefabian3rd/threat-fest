@@ -16,7 +16,6 @@ ALGORITHM:
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { getSubmittedBandsAndGenres } from "../ApiManager"
-import "./Bands.css"
 
 export const CurrentLineupList = ( {searchTermState, filteredGenreState} ) => {
     const [bands, setBands] = useState([])
@@ -60,13 +59,16 @@ export const CurrentLineupList = ( {searchTermState, filteredGenreState} ) => {
     useEffect(
         () => {
             const filteredBands = bands.filter((band) => band.genreId === parseInt(filteredGenreState))
+            if (parseInt(filteredGenreState) > 0) {
             setFilteredCurrentBands(filteredBands)
+            } else {
+                setFilteredCurrentBands(bands)
+            }
         },
         [filteredGenreState]
     )
 
     return <article>
-    <h2 className="lineup__header">Threat Fest 2023</h2>
         <section className="bands">
             {
                 filteredCurrentBands.map(
@@ -75,7 +77,7 @@ export const CurrentLineupList = ( {searchTermState, filteredGenreState} ) => {
                         return <section className="band" key={`band--${band.id}`}>
                                     <img onClick={() => navigate(`/lineup/${band.id}`)} className="band__photo" src={band.photoURL}></img>
                                     <h3 onClick={() => navigate(`/lineup/${band.id}`)} className="band__name"><b>{band.bandName}</b></h3>
-                                    <div>{band.genre.name}</div>
+                                    <div className="band__genre">{band.genre.name}</div>
                                 </section>
                         }
                     }

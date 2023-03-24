@@ -3,37 +3,183 @@
 }
 
 .approval__btn {
-    background: none;
-    width: 45px;
-    font-size: 25px;
-    border: none;
     cursor: pointer;
     margin-right: 10px;
+    background: rgb(1, 107, 1);
+    width: 80px;
+    height: 35px;
+    color: white;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
+
+.approval__details__btn {
+    cursor: pointer;
+    margin-left: 150px;
+    margin-right: 10px;
+    background: rgb(1, 107, 1);
+    width: 80px;
+    height: 35px;
+    color: white;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
 }
 
 .deny__btn {
-    background: none;
-    width: 45px;
-    font-size: 25px;
+    cursor: pointer;
+    background: rgb(196, 0, 0);
+    width: 80px;
+    height: 36px;
+    color: white;
+    border-radius: 4px;
     border: none;
     cursor: pointer;
 }
 
-.submittedBand {
-    background: rgba(.5,.5,.5,.2);
-    margin-bottom: 10px;
+.deny__details__btn {
+    cursor: pointer;
+    background: rgb(196, 0, 0);
+    width: 80px;
+    height: 35px;
+    color: white;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
+
+.approved__btn {
+    background: rgb(1, 107, 1);
+    width: 80px;
+    height: 35px;
+    color: white;
+    border-radius: 4px;
+    border: none;
+}
+
+.approved__details__btn {
+    background: rgb(1, 107, 1);
+    margin-left: 200px;
+    width: 80px;
+    height: 35px;
+    color: white;
+    border-radius: 4px;
+    border: none;
+}
+
+.submittedBands{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.submittedBand {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    margin-top: 50px;
+    background: rgba(250,250,250,.9);
+    border: 4px solid black;
+    border-radius: 10px;
+    box-shadow: black 0px 3px 10px;
+    width: 300px;
+    height: 325px;
+    color: black;
+}
+
+.submitted__band__photo {
+    width: 300px;
+    height: 200px;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-left: -17.5px;
+    margin-top: -25px;
 }
 
 .band__info {
     padding: 15px;
 }
 
+.band__name {
+    margin-top: 5px;
+}
+
 .button__section {
     padding: 15px;
 }
 
+.band__details {
+    margin-bottom: 25px;
+}
+
 .details__link {
     cursor: pointer;
+    margin-bottom: -5px;
+}
+
+.submissionForm__title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    text-align: center;
+    font-size: 75px;
+    font-family: 'Permanent Marker', cursive;
+    color: white;
+    text-shadow: black 2px 2px 10px;
+    margin-top: -115px;
+}
+
+.submissionForm__header__image {
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin-top: 117px;
+  }
+
+.submissionForm {
+    background-color: rgba(255,255,255,.9);
+    border: 3px solid black;
+    border-radius: 20px;
+    width: 50%;
+    margin-top: 50px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 50px;
+    margin-bottom: 50px;
+}
+
+.form-group {
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+label {
+    font-family: 'Libre Franklin', sans-serif;
+}
+
+.btn-submit {
+    margin-top: 20px;
+    margin-left: 42%;
+    background: rgb(0, 81, 255);
+    width: 80px;
+    height: 35px;
+    color: white;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
+
+.input__field {
+    padding-top: 10px;
+}
+
+.form-control-band__bio{
+    height: 200px;
+    width: 500px;
 }

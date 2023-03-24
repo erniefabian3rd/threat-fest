@@ -8,6 +8,7 @@ ALGORITHM:
 
 import { useEffect, useState } from "react"
 import { getGenres, getYears } from "../ApiManager"
+import "./Bands.css"
 
 export const AlumniBandYearFilter = ( {setterFunction}) => {
     const [years, setYears] = useState([])
@@ -24,7 +25,7 @@ export const AlumniBandYearFilter = ( {setterFunction}) => {
 
 
     return (
-        <div>
+        <div className="year__filter">
             <select
                 onChange={
                     (changeEvent) => {
@@ -57,8 +58,8 @@ export const AlumniBandGenreFilter = ( {setterFunction} ) => {
     )
 
     return (
-        <div>
-            <select
+        <div className="filter">
+            <select 
                 onChange={
                     (changeEvent) => {
                         setterFunction(changeEvent.target.value)
@@ -90,7 +91,7 @@ export const CurrentLineupGenreFilter = ( {setterFunction} ) => {
     )
 
     return (
-        <div>
+        <div class="filter">
             <select
                 onChange={
                     (changeEvent) => {

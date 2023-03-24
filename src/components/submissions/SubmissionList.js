@@ -14,9 +14,10 @@ ALGORITHM:
 */
 
 import { useEffect, useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { approveSubmissions, denySubmissions, getSubmittedBands, getSubmittedBandsAndGenres } from "../ApiManager"
 import "./Submissions.css"
+import submitPhoto from "../../images/tf_gridstrip_3.png"
 
 export const SubmissionList = () => {
     const [bands, setBands] = useState([])
@@ -56,29 +57,31 @@ export const SubmissionList = () => {
     const handleDeny = (bandId) => {
         denySubmissions(bandId)
             .then(() => {
-                alert(`You deleted ${bandId}`)
+                alert(`Band has been denied`)
                 return getAllSubmittedBands()
             })
     }
 
     return <article>
-        <h2 className="submitted__bands__header">Submitted Bands:</h2>
+       <h2 className="submissionForm__title">Submissions</h2>
+        <img className="submissionForm__header__image" src={submitPhoto}></img>
         <section className="submittedBands">
             {
                 bands.map(
                     (band) => {
                         return <section className="submittedBand" key={`submittedBand--${band.id}`}>
                             <div className="band__info">
-                                <header><b>{band.bandName}</b></header>
+                                <img className="submitted__band__photo" src={band.photoURL}></img>
+                                <header className="band__name"><b>{band.bandName}</b></header>
                                 <p onClick={() => navigate(`/submissions/${band.id}`)} className="details__link"><u>View Details</u></p>
                             </div>
                             <div className="button__section">
                             {band.isApproved === false ? (
                                 <>
-                                <button className="approval__btn" onClick={() => handleApproval(band.id)}>✅</button>
-                                <button className="deny__btn" onClick={() => handleDeny(band.id)}>❌</button>
+                                <button className="approval__btn" onClick={() => handleApproval(band.id)}><b>Approve</b></button>
+                                <button className="deny__btn" onClick={() => handleDeny(band.id)}><b>Deny</b></button>
                                 </>
-                                ) : <button>Approved!</button> }
+                                ) : <button className="approved__btn"><b>Approved</b></button> }
                             </div>
                         </section>
                     }

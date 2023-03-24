@@ -89,7 +89,7 @@ export const Register = (props) => {
                         placeholder="Password" required />
                 </fieldset>
                 <fieldset>
-                    <button className="register__btn" type="submit"> Register </button>
+                    <button className="register__btn" type="submit"><b>Register</b></button>
                 </fieldset>
                 <section className="link--login">
                     <Link to="/login">Already a member?</Link>

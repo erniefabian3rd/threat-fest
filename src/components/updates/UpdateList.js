@@ -9,6 +9,7 @@ ALGORITHM:
 import { useEffect, useState } from "react"
 import { getUpdatesAndUsers } from "../ApiManager"
 import "./Updates.css"
+import updatePhoto from "../../images/tf_gridstrip_4.png"
 
 export const UpdateList = () => {
     const [updates, setUpdates] = useState([])
@@ -23,17 +24,27 @@ export const UpdateList = () => {
         []
     )
 
+    const sortedUpdates = updates.length > 0
+    ? [...updates].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+    : [];
+
     return <article>
-        <h2 className="updateList__header">Updates:</h2>
+        <h2 className="updateForm__title">Updates</h2>
+        <img className="updateForm__header__image" src={updatePhoto}></img>
         <section className="updates">
             {
-                updates.map(
+                sortedUpdates.map(
                     (update) => {
                         return <section className="update" key={`update--${update.id}`}>
-                            <header className="message">{update.message}</header>
-                            <div className="author__date">
-                                <div>Sent by: {update.user.name}</div>
-                                <div>{update.timestamp}</div>
+                            <div className="update__container">
+                                <div className="sender__image__container">
+                                    <img className="sender__image" src={update.user.photo}></img>
+                                </div>
+                                <div className="update__content">
+                                    <header><b>{update.user.name}</b></header><br/>
+                                        <div>{update.message}</div><br/>
+                                        <div className="timestamp">{update.timestamp}</div>
+                                </div>
                             </div>
 
                         </section>

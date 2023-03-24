@@ -13,6 +13,8 @@ ALGORITHM:
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { sendUpdates } from "../ApiManager"
+import "./Updates.css"
+import updatePhoto from "../../images/tf_gridstrip_4.png"
 
 export const UpdateForm = () => {
     const navigate = useNavigate()
@@ -39,32 +41,35 @@ export const UpdateForm = () => {
     }
 
     return (
-        <form className="updateForm">
-            <h2 className="updateForm__title">Update Form:</h2>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="updates">Message:</label>
-                    <textarea
-                        required autoFocus
-                        type="text"
-                        className="form-control"
-                        placeholder="Type Message Here..."
-                        value={update.message}
-                        onChange={
-                            (evt) => {
-                                const copy = { ...update }
-                                copy.message = evt.target.value
-                                messageUpdate(copy)
-                            }
-                        } />
-                </div>
-            </fieldset>
+        <>
+            <h2 className="updateForm__title">Send Updates</h2>
+            <img className="updateForm__header__image" src={updatePhoto}></img>
+            <form className="updateForm">
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="updates">Message:</label>
+                        <textarea
+                            required autoFocus
+                            type="text"
+                            className="form-control-updates"
+                            placeholder="Type Message Here..."
+                            value={update.message}
+                            onChange={
+                                (evt) => {
+                                    const copy = { ...update }
+                                    copy.message = evt.target.value
+                                    messageUpdate(copy)
+                                }
+                            } />
+                    </div>
+                </fieldset>
 
-            <button
-                onClick={(clickEvent) => sendMessageButton(clickEvent)}
-                className="btn btn-primary">
-                Send
-            </button>
-        </form>
+                <button
+                    onClick={(clickEvent) => sendMessageButton(clickEvent)}
+                    className="btn-update"><b>
+                    Send
+                </b></button>
+            </form>
+        </>
     )
 }

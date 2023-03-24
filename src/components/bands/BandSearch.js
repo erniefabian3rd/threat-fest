@@ -5,6 +5,7 @@ ALGORITHM:
     -Create functions that take a setterFunction as a parameter 
         return JSX with the search bar, setting the searched values
 */
+import "./Bands.css"
 
 export const AlumniBandSearch = ( {setterFunction }) => {
     return (
@@ -22,7 +23,7 @@ export const AlumniBandSearch = ( {setterFunction }) => {
 
 export const CurrentBandSearch = ( {setterFunction }) => {
     return (
-        <div>
+        <div className="search__filter">
             <input className="search__bar"
                 onChange={
                     (changeEvent) => {

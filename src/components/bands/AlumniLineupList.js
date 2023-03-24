@@ -17,7 +17,6 @@ ALGORITHM:
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { getAlumniBands } from "../ApiManager"
-import "./Bands.css"
 
 export const AlumniLineupList = ({ searchTermState, filteredYearState, filteredGenreState }) => {
     const [alumniBands, setAlumniBands] = useState([])
@@ -29,28 +28,31 @@ export const AlumniLineupList = ({ searchTermState, filteredYearState, filteredG
     const navigate = useNavigate()
 
 
-    useEffect(
-        () => {
-            getAlumniBands()
-                .then((alumniBandsArray) => {
-                    const bandsByName = alumniBandsArray.reduce((acc, band) => {
-                        if (!acc[band.bandName]) {
-                            acc[band.bandName] = {
-                                ...band,
-                                years: [band.yearId],
-                            }
-                        } else {
-                            acc[band.bandName].years.push(band.yearId)
+    useEffect(() => {
+        getAlumniBands()
+            .then((alumniBandsArray) => {
+                const bandsByName = alumniBandsArray.reduce((acc, band) => {
+                    if (!acc[band.bandName]) {
+                        acc[band.bandName] = {
+                            ...band,
+                            years: [band.yearId],
                         }
-                        return acc
-                    }, {})
-                    const removedDuplicates = Object.values(bandsByName)
-                    removedDuplicates.sort((a, b) => a.bandName.localeCompare(b.bandName))
-                    setAlumniBands(removedDuplicates)
-                })
-        },
-        []
-    )
+                    } else {
+                        acc[band.bandName].years.push(band.yearId)
+                    }
+                    return acc
+                }, {})
+                const removedDuplicates = Object.values(bandsByName)
+                let filteredAlumniBands = removedDuplicates
+                if (filteredYearState) {
+                    filteredAlumniBands = removedDuplicates.filter(
+                        (alumniBand) => alumniBand.years.includes(parseInt(filteredYearState))
+                    )
+                }
+                filteredAlumniBands.sort((a, b) => a.bandName.localeCompare(b.bandName))
+                setAlumniBands(filteredAlumniBands)
+            })
+    }, [filteredYearState])
 
     useEffect(
         () => {
@@ -71,42 +73,44 @@ export const AlumniLineupList = ({ searchTermState, filteredYearState, filteredG
         [searchTermState]
     )
 
-
-    useEffect(
-        () => {
-            let filteredYearAlumni = alumniBands
-            if (filteredYearState) {
-            filteredYearAlumni = alumniBands.filter((alumniBand) => alumniBand.yearId === parseInt(filteredYearState))
-            }
-            setFilteredAlumni(filteredYearAlumni)
-    },
-    [filteredYearState]
-    )
+    useEffect(() => {
+        let filteredYearAlumni = alumniBands
+        if (filteredYearState) {
+            filteredYearAlumni = alumniBands.reduce((acc, alumniBand) => {
+                if (alumniBand.yearId === parseInt(filteredYearState)) {
+                    acc.push(alumniBand)
+                }
+                return acc
+            }, [])
+        }
+        setFilteredAlumni(filteredYearAlumni)
+    }, [filteredYearState])
 
     useEffect(
         () => {
             const filteredGenreAlumni = alumniBands.filter((alumniBand) => alumniBand.genreId === parseInt(filteredGenreState))
-            setFilteredAlumni(filteredGenreAlumni)
+            if (parseInt(filteredGenreState) > 0) {
+                setFilteredAlumni(filteredGenreAlumni)
+            } else {
+                setFilteredAlumni(alumniBands)
+            }
         },
         [filteredGenreState]
     )
-    
 
-
-return <article>
-    <h2 className="lineup__header">Alumni Bands</h2>
-    <section className="bands">
-        {
-            filteredAlumniBands.map(
-                (alumniBand) => {
-                    return <section className="band" key={`alumniBand--${alumniBand.id}`}>
-                        <img onClick={() => navigate(`/alumni/${alumniBand.id}`)} className="band__photo" src={alumniBand.photoURL}></img>
-                        <h3 onClick={() => navigate(`/alumni/${alumniBand.id}`)}><b>{alumniBand.bandName}</b></h3>
-                        <div>{alumniBand.genre.name}</div>
-                    </section>
-                }
-            )
-        }
-    </section>
-</article>
+    return <article>
+        <section className="bands">
+            {
+                filteredAlumniBands.map(
+                    (alumniBand) => {
+                        return <section className="band" key={`alumniBand--${alumniBand.id}`}>
+                            <img className="band__photo" onClick={() => navigate(`/alumni/${alumniBand.id}`)} src={alumniBand.photoURL}></img>
+                            <h3 className="band__name" onClick={() => navigate(`/alumni/${alumniBand.id}`)}><b>{alumniBand.bandName}</b></h3>
+                            <div className="band__genre">{alumniBand.genre.name}</div>
+                        </section>
+                    }
+                )
+            }
+        </section>
+    </article>
 }
